@@ -4,15 +4,15 @@ services:
   app:
     build:
       context: .
-    image: yarinlaniado/noteapp
+    image: gw111/note-app
     ports:
       - "8080:8000"
     depends_on:
       - mongodb
     links:
-      - mongodb 
+      - mongodb
   mongodb:
-    image: yarinlaniado/mongo:1.0
+    image: gw111/mongo-db:1.0
     container_name: my-mongodb-container
     ports:
       - "27017:27017"
@@ -21,6 +21,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: note
     volumes:
       - mongodb-data:/data/db
-    
+
 volumes:
   mongodb-data:
+
