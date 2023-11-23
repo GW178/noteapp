@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - dev
+      - k8s
     paths-ignore:
       - 'version.txt'  # Ignore changes to version.txt file
 jobs:
