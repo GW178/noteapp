@@ -80,9 +80,9 @@ jobs:
       - name: Push Docker image to DockerHub
         if: steps.test.outcome == 'success'
         run: |
-          IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/noteapp"
+          IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/note-app"
           VERSION="${{ env.NEW_VERSION }}"
-          docker tag gw111/noteapp:latest "$IMAGE_NAME:$VERSION"
+          docker tag gw111/note-app:latest "$IMAGE_NAME:$VERSION"
           docker push "$IMAGE_NAME:$VERSION"
 
       - name: Clean up
