@@ -94,7 +94,7 @@ jobs:
       - name: Deploy to EKS
         if: steps.test.outcome == 'success'
         run: |
-          # Placeholder for deploying application to EKS
+          # Placeholder for deploying app to EKS
 
       - name: Notify on Test Failure
         if: steps.test.outcome != 'success'
