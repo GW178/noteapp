@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/pv0001/" # replace with the actual path on the host
+    path: "/data/pv0001/" # replace with the actual path on the host?
 
 ---
 apiVersion: v1
@@ -22,7 +22,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/pv0002/" # replace with the actual path on the host
+    path: "/data/pv0002/" # replace with the actual path on the host?
 
 ---
 apiVersion: v1
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: yarinlaniado/mongo:1.0
+        image: gw111/mongo-db:1.0
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           value: "note"
@@ -98,7 +98,7 @@ spec:
     spec:
       containers:
       - name: note-app
-        image: yarinlaniado/noteapp:2.4.0
+        image: gw111/note-app:latest
         ports:
         - containerPort: 8000
         volumeMounts:
@@ -113,17 +113,11 @@ spec:
           mountPath: /etc/filebeat
         - name: logs
           mountPath: /logs
-        - name: filebeat-ca
-          mountPath: /usr/share/filebeat/ca.crt 
-          subPath: ca.crt
 
       volumes:
       - name: logs
         persistentVolumeClaim:
           claimName: logs
-      - name: filebeat-ca
-        secret:
-          secretName: quickstart-es-http-certs-public #make sure that it is existing!
       - name: filebeat-config
         configMap:
           name: filebeat-config
@@ -152,4 +146,3 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8000
-

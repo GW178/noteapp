@@ -1,0 +1,3 @@
+-install minikube
+-make sure you have conteiner engine
+-minkube start --nodes=2 (so you'll be initiated with 2 nodes)

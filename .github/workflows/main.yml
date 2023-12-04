@@ -89,9 +89,9 @@ jobs:
         run: |
           docker-compose down -d
 
-      - name: Deploy to EKS
-        if: steps.test.outcome == 'success'
-        run: |
+     # - name: Deploy to EKS
+     #   if: steps.test.outcome == 'success'
+     #   run: |
           # Placeholder for deploying app to EKS
 
       - name: Notify on Test Failure

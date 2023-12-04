@@ -24,4 +24,45 @@ services:
 
 volumes:
   mongodb-data:
+---
 
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    image: gw111/note-app
+    ports:
+      - "8080:8000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb 
+    volumes:
+      - logs: noteapp/k8s/elk/logs
+  mongodb:
+    image: gw111/mongo-db:1.0
+    container_name: my-mongodb-container
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: note
+      MONGO_INITDB_ROOT_PASSWORD: note
+    volumes:
+      - mongodb-data:/data/db
+  filebeat:
+    build:
+      context: ./elk/filebeat
+    volumes:
+      - logs:/logs
+    restart: always
+
+    
+volumes:
+  mongodb-data:
+  logs:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'nfs'
+      device: ./elk/logs

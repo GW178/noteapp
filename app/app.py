@@ -16,19 +16,19 @@ logging.basicConfig(filename=log_file, level=logging.INFO,
 # list of existing notes
 def get_existing_notes():
     notes = []
-    cursor = collection.find({})  # Exclude _id field from the query result
+    cursor = collection.find({})
 
     for note in cursor:
         notes.append({
             'title': note['title'],
             'content': note['content'],
-            'created_at': note.get('created_at', 'N/A'),  # Use get method to handle missing 'created_at' attribute
+            'created_at': note.get('created_at', 'N/A'),
             '_id': note['_id']
         })
     return notes
 
 
-# MongoDB connection
+# mongoDB connection
 client = MongoClient('mongodb://note:note@mongodb:27017/')
 db = client['notes_db']
 collection = db['notes_collection']
